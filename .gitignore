@@ -9,3 +9,5 @@ _minted*/
 *.last
 /custom.el
 /projectile-bookmarks.eld
+*#
+/myinit.el
