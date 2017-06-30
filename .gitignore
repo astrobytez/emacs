@@ -1,0 +1,11 @@
+*.dat
+*~
+elpa/
+eshell/
+_minted*/
+/history
+/places
+/recentf
+*.last
+/custom.el
+/projectile-bookmarks.eld
