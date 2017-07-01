@@ -285,6 +285,42 @@ Here we configure the ERC client for IRC chat
   (load "~/.emacs.d/.ercrc.el")
 #+END_SRC
 
+** Configure Clojure support
+
+Further borrowings from [[https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][Arjen Wiersma]] on Clojure configuration
+
+#+BEGIN_SRC emacs-lisp
+  (use-package cider
+    :ensure t
+    :pin melpa-stable
+
+    :config
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'eldoc-mode)
+    (add-hook 'cider-mode-hook #'cider-hydra-mode)
+    (add-hook 'clojure-mode-hook #'paredit-mode)
+    (setq cider-repl-use-pretty-printing t)
+    (setq cider-repl-display-help-banner nil)
+    (setq cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")
+
+    :bind (("M-r" . cider-namespace-refresh)
+           ("C-c r" . cider-repl-reset)
+           ("C-c ." . cider-reset-test-run-tests))
+    )
+
+  ;; (use-package clj-refactor
+  ;;   :ensure t
+  ;;   :config
+  ;;   (add-hook 'clojure-mode-hook (lambda ()
+  ;;                                  (clj-refactor-mode 1)
+  ;;                                  ;; insert keybinding setup here
+  ;;                                  ))
+  ;;   (cljr-add-keybindings-with-prefix "C-c C-m")
+  ;;   (setq cljr-warn-on-eval nil)
+  ;;   :bind ("C-c '" . hydra-cljr-help-menu/body)
+  ;;   )
+#+END_SRC
 * Ancillary
 
 ** GDB Debugging configuration
