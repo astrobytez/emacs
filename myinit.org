@@ -15,6 +15,49 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
+** Configure Security
+
+As per the article by [[https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][Arjen Wiersma]] on his emacs configuration we setup security.
+
+#+BEGIN_SRC emacs-lisp
+  ;;  (if (fboundp 'gnutls-available-p)
+  ;;      (fmakunbound 'gnutls-available-p))
+
+  (require 'cl)
+  (setq tls-checktrust t)
+
+  (setq python (or (executable-find "py.exe")
+                   (executable-find "python")
+                   ))
+
+  (let ((trustfile
+         (replace-regexp-in-string
+          "\\\\" "/"
+          (replace-regexp-in-string
+           "\n" ""
+           (shell-command-to-string (concat python " -m certifi"))))))
+    (setq tls-program
+          (list
+           (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+                   (if (eq window-system 'w32) ".exe" "") trustfile)))
+    (setq gnutls-verify-error t)
+    (setq gnutls-trustfiles (list trustfile)))
+
+  ;; Test the settings by using the following code snippet:
+   ;; (let ((bad-hosts
+   ;;        (loop for bad
+   ;;              in `("https://wrong.host.badssl.com/"
+   ;;                   "https://self-signed.badssl.com/")
+   ;;              if (condition-case e
+   ;;                     (url-retrieve
+   ;;                      bad (lambda (retrieved) t))
+   ;;                   (error nil))
+   ;;              collect bad)))
+   ;;   (if bad-hosts
+   ;;       (error (format "tls misconfigured; retrieved %s ok" bad-hosts))
+   ;;     (url-retrieve "https://badssl.com"
+   ;;                   (lambda (retrieved) t))))
+#+END_SRC
 ** Setup emacs for package configuration
 
 #+BEGIN_SRC emacs-lisp
