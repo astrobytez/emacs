@@ -134,18 +134,51 @@ Further to configuring clojure:
 
 ** Configure autocompletion
 #+BEGIN_SRC emacs-lisp
-(use-package company
-    :ensure t
-    :bind (("C-c /". company-complete))
-    :config
-    (global-company-mode)
-    )
+  (defun complete-string (source)
+    (cond
+     ((fboundp #'auto-complete) (auto-complete source))
+     (t (dabbrev-expand source))))
 
-  ;;  (use-package company-flx
-  ;;    :ensure t
-  ;;    :config
-  ;;    (with-eval-after-load 'company
-  ;;      (company-flx-mode +1)))
+  (defun smart-tab ()
+    (interactive)
+    (if (minibufferp)
+        (unless (minibuffer-complete)
+          (complete-string nil))
+      (if mark-active
+          (indent-region (region-beginning) (region-end))
+        (if (looking-at "\\_>")
+            (complete-string nil)
+          (indent-for-tab-command)))))
+
+  (ac-config-default)
+  (global-set-key (kbd "TAB") #'smart-tab)
+
+  ;; (undo-tree-mode 1)
+  ;; (projectile-mode 1)
+  ;; (yas-global-mode 1)
+  ;; (global-auto-complete-mode 1)
+  ;; (setq browse-kill-ring-highlight-inserted-item t
+  ;;       yas-snippet-dirs `(,(concat (expand-file-name user-emacs-directory) "snippets"))
+  ;;       yas-triggers-in-field 1)
+
+  ;; (defun ac-add-yasnippet-source ()
+  ;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
+
+  ;; (add-hook 'prog-mode-hook #'ac-add-yasnippet-source)
+  ;; (add-hook 'text-mode-hook #'auto-complete-mode)
+
+  ;; (use-package company
+  ;;     :ensure t
+  ;;     :bind (("C-c /". company-complete))
+  ;;     :config
+  ;;     (global-company-mode)
+  ;;     )
+
+  ;;   ;;  (use-package company-flx
+  ;;   ;;    :ensure t
+  ;;   ;;    :config
+  ;;   ;;    (with-eval-after-load 'company
+  ;;   ;;      (company-flx-mode +1)))
 #+END_SRC
 ** Configure theme
 
