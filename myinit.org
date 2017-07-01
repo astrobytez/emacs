@@ -218,6 +218,18 @@ We switch on if whether are in a graphical display and configure fonts and sizes
             `(org-document-title
               ((t (,@headline ,@variable-tuple :height 1.5 :underline nil)))))))
 #+END_SRC
+
+We want to use powerline terminal theme if possible
+
+#+BEGIN_SRC emacs-lisp
+  (use-package powerline
+    :ensure t)
+
+  (require 'powerline)
+  (powerline-default-theme)
+
+#+END_SRC
+
 ** Configure org mode
    
 We find that export to pdf fails with an obtuse error in the default setup.
@@ -292,4 +304,33 @@ Here we configure the ERC client for IRC chat
 #+BEGIN_SRC emacs-lisp
   (setq gdb-many-windows 1
         gdb-show-main 1)
+#+END_SRC
+** Miscellaneous Stuff
+
+Borrowing some more misc stuff from [[view-source:https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][Arjen Wiersma]].
+
+#+BEGIN_SRC emacs-lisp
+  ;; Custom binding for magit-status
+  (use-package magit
+    :config
+    (global-set-key (kbd "C-c m") 'magit-status))
+
+  ;; don't show the startup message
+  (setq inhibit-startup-message t)
+
+  ;; turn on line numbers
+  ;; (global-linum-mode)
+
+  (defun iwb ()
+    "indent whole buffer"
+    (interactive)
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)
+    (untabify (point-min) (point-max)))
+
+  ;; add a nice way to indent a buffer and clean up trailing whitespace
+  (global-set-key (kbd "C-c n") 'iwb)
+
+  ;; turn on parenthesis pair matching
+  (electric-pair-mode t)
 #+END_SRC
