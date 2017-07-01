@@ -1,9 +1,19 @@
 * Initialisation file
 
-#+OPTIONS: toc:nil
-
-*Author*: Nicholas Hallam
-*email*: nph@protonmail.com
+#+TITLE: My Emacs Initialisation file
+#+DATE: <2017-07-01 Sat>
+#+AUTHOR: pheonix
+#+EMAIL: engineer@ghost
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+CREATOR: Emacs 25.2.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
 
 ** Setup emacs for package configuration
 
