@@ -77,7 +77,7 @@ As per the article by [[https://gitlab.com/buildfunthings/emacs-config/blob/mast
 
 ** Initial package used in configuration
 
-Here we setup a list of packages to install for the configuration.
+Setup a list of packages to install for the configuration.
 A helper function parses the list and installs the packages as requied.
 
 #+BEGIN_SRC emacs-lisp
@@ -94,7 +94,8 @@ A helper function parses the list and installs the packages as requied.
                                diminish
                                haskell-mode
                                weechat
-                               htmlize))
+                               htmlize
+                               org-bullets))
 
   (defun user-packages-install ()
     (dolist (package user-packages-list)
@@ -150,33 +151,6 @@ Further to configuring clojure:
 
   (ac-config-default)
   (global-set-key (kbd "TAB") #'smart-tab)
-
-  ;; (undo-tree-mode 1)
-  ;; (projectile-mode 1)
-  ;; (yas-global-mode 1)
-  ;; (global-auto-complete-mode 1)
-  ;; (setq browse-kill-ring-highlight-inserted-item t
-  ;;       yas-snippet-dirs `(,(concat (expand-file-name user-emacs-directory) "snippets"))
-  ;;       yas-triggers-in-field 1)
-
-  ;; (defun ac-add-yasnippet-source ()
-  ;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
-
-  ;; (add-hook 'prog-mode-hook #'ac-add-yasnippet-source)
-  ;; (add-hook 'text-mode-hook #'auto-complete-mode)
-
-  ;; (use-package company
-  ;;     :ensure t
-  ;;     :bind (("C-c /". company-complete))
-  ;;     :config
-  ;;     (global-company-mode)
-  ;;     )
-
-  ;;   ;;  (use-package company-flx
-  ;;   ;;    :ensure t
-  ;;   ;;    :config
-  ;;   ;;    (with-eval-after-load 'company
-  ;;   ;;      (company-flx-mode +1)))
 #+END_SRC
 ** Configure theme
 
@@ -196,18 +170,7 @@ Firstly we make special symbols resemble as characters.
 
 Taken from [["http://howardism.org/Technical/Emacs/orgmode-wordprocessor.html"][Org as a Word Processor]]
 
-
-Firstly we may need to install org-bullets.
-
-#+BEGIN_SRC emacs-lisp
-  ;; install org-bullets if required
-  (use-package org-bullets
-    :ensure t)
-#+END_SRC
-
-Next lets do as the article shows.
-
-We switch on if whether are in a graphical display and configure fonts and sizes appropriately.
+We switch based on whether we are in a graphical display and configure fonts and sizes appropriately.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-hide-emphasis-markers t)
@@ -305,10 +268,7 @@ Now lets configure org modes syntax highlighting, fonts and layout.
 
 ** Default startup buffer
 
-TODO fixme -- startup buffer doesn't work
-#+BEGIN_SRC emacs-lisp
-;;  (switch-to-buffer "*scratch*")
-#+END_SRC
+TODO fixme -- create a startup buffer
 
 ** ERC Configuration
 
