@@ -130,33 +130,21 @@ Further to configuring clojure:
   (require 'cider)
 #+END_SRC
 
-** Configure Spelling
-
-Also from the article and dotfiles of [[view-source:https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][Arjen Wiersma]].
-
+** Configure autocompletion
 #+BEGIN_SRC emacs-lisp
-  (defun spell-buffer-dutch ()
-    (interactive)
-    (ispell-change-dictionary "nl_NL")
-    (flyspell-buffer))
-
-  (defun spell-buffer-english ()
-    (interactive)
-    (ispell-change-dictionary "en_US")
-    (flyspell-buffer))
-
-  (use-package ispell
+(use-package company
+    :ensure t
+    :bind (("C-c /". company-complete))
     :config
-    (when (executable-find "hunspell")
-      (setq-default ispell-program-name "hunspell")
-      (setq ispell-really-hunspell t))
+    (global-company-mode)
+    )
 
-    ;; (setq ispell-program-name "aspell"
-    ;;       ispell-extra-args '("--sug-mode=ultra"))
-    :bind (("C-c N" . spell-buffer-dutch)
-           ("C-c n" . spell-buffer-english)))
+  ;;  (use-package company-flx
+  ;;    :ensure t
+  ;;    :config
+  ;;    (with-eval-after-load 'company
+  ;;      (company-flx-mode +1)))
 #+END_SRC
-
 ** Configure theme
 
 #+BEGIN_SRC emacs-lisp
