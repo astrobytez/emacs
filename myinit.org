@@ -100,7 +100,7 @@ Firstly we make special symbols resemble as characters.
 
 #+BEGIN_SRC emacs-lisp
   ;; set symbols to be pretty
-  (global-prettify-symbols-mode 1)
+  (global-prettify-symbols-mode t)
 #+END_SRC
 
 Taken from [["http://howardism.org/Technical/Emacs/orgmode-wordprocessor.html"][Org as a Word Processor]]
