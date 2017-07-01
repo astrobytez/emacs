@@ -95,11 +95,13 @@ A helper function parses the list and installs the packages as requied.
                                auto-complete
                                diminish
                                haskell-mode
-                               slime))
+                               slime
+                               htmlize))
 
   (defun user-packages-install ()
     (dolist (package user-packages-list)
-      (use-package package :ensure t)))
+      (unless (package-installed-p package)
+        (package-install package))))
 
   ;; install the package list
   (user-packages-install)
