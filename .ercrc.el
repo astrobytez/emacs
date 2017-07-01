@@ -73,7 +73,7 @@
   "Ask for a password before connecting to SERVER"
   (let ((password (read-passwd "Enter IRC Password: ")))
     (erc-tls :server server :port erc-port :nick erc-nick
-             :password password)))
+             :password password :full-name "nil")))
 
 (defun erc-start-or-switch (&rest junk)
   "Connect to ERC, or switch to last active buffer"
