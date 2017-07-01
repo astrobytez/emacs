@@ -132,12 +132,29 @@ Further to configuring clojure:
 
 ** Configure Spelling
 
+Also from the article and dotfiles of [[view-source:https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][Arjen Wiersma]].
+
 #+BEGIN_SRC emacs-lisp
-  (require 'ispell)
+  (defun spell-buffer-dutch ()
+    (interactive)
+    (ispell-change-dictionary "nl_NL")
+    (flyspell-buffer))
 
-  (setq ispell-dictionary "en_GB")
+  (defun spell-buffer-english ()
+    (interactive)
+    (ispell-change-dictionary "en_US")
+    (flyspell-buffer))
 
-  (require 'flyspell)
+  (use-package ispell
+    :config
+    (when (executable-find "hunspell")
+      (setq-default ispell-program-name "hunspell")
+      (setq ispell-really-hunspell t))
+
+    ;; (setq ispell-program-name "aspell"
+    ;;       ispell-extra-args '("--sug-mode=ultra"))
+    :bind (("C-c N" . spell-buffer-dutch)
+           ("C-c n" . spell-buffer-english)))
 #+END_SRC
 
 ** Configure theme
