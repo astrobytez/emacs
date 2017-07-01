@@ -1,5 +1,3 @@
-* Initialisation file
-
 #+TITLE: My Emacs Initialisation file
 #+DATE: <2017-07-01 Sat>
 #+AUTHOR: pheonix
@@ -14,7 +12,7 @@
 #+KEYWORDS:
 #+LANGUAGE: en
 #+SELECT_TAGS: export
-
+* Initialisation file
 ** Configure Security
 
 As per the article by [[https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][Arjen Wiersma]] on his emacs configuration we setup security.
@@ -317,7 +315,7 @@ TODO fixme -- startup buffer doesn't work
 Here we configure the ERC client for IRC chat
 
 #+BEGIN_SRC emacs-lisp
-  (load "~/.emacs.d/.ercrc.el")
+  ;; (load "~/.emacs.d/.ercrc.el")
 #+END_SRC
 
 * Ancillary
