@@ -91,6 +91,7 @@ A helper function parses the list and installs the packages as requied.
                                projectile
                                yasnippet
                                auto-complete
+                               auto-complete-c-headers
                                diminish
                                haskell-mode
                                weechat
