@@ -152,6 +152,17 @@ Further to configuring clojure:
 
   (ac-config-default)
   (global-set-key (kbd "TAB") #'smart-tab)
+
+  (defun my:ac-c-header-init ()
+    (require 'auto-complete-c-headers)
+    (add-to-list 'ac-sources 'ac-source-headers))
+
+  (add-hook 'c++-mode-hook 'my:ac-c-header-init)
+  (add-hook 'c-mode-hook 'my:ac-c-header-init)
+#+END_SRC
+** Configure yasnippets
+#+BEGIN_SRC elisp
+  (yas-global-mode 1)
 #+END_SRC
 ** Configure theme
 
